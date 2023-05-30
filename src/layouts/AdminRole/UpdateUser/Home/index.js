@@ -5,12 +5,11 @@ import Footer from "examples/Footer";
 import MDTypography from "components/MDTypography";
 import { useMaterialUIController } from "context";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useParams } from "react-router-dom";
 function HomeUpdateUser() {
     const [controller, dispatch] = useMaterialUIController();
-const {
-  sidenavColor,
-} = controller;
-    
+const {  sidenavColor,} = controller;
+    const {user} = useParams()
   return (
     <DashboardLayout>
       <DashboardNavbar/>

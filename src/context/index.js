@@ -72,14 +72,14 @@ function reducer(state, action) {
   }
 }
 // tạo biến chứa model style
-const sidenavColor = sessionStorage.getItem("sidenavColor") || "info"
-const Sidenav = sessionStorage.getItem("Sidenav")
-const darkMode = Boolean(sessionStorage.getItem("darkMode")==='true');
-const loginAuth=sessionStorage.getItem("loginAuth") || JSON.stringify(`{role:"noRole"}`)
+const sidenavColor = localStorage.getItem("sidenavColor") || "info"
+const Sidenav = localStorage.getItem("Sidenav")
+const darkMode = Boolean(localStorage.getItem("darkMode")==='true');
+const loginAuth=localStorage.getItem("loginAuth")
 // Material Dashboard 2 React context provider
 function MaterialUIControllerProvider({ children }) {
   const initialState = {
-    loginAuth : JSON.parse(loginAuth),
+    loginAuth : loginAuth ? JSON.parse(loginAuth) : {role:"noRole"},
     miniSidenav: false,
     transparentSidenav: Sidenav==="transparent",
     whiteSidenav: Sidenav==="white",

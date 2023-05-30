@@ -18,12 +18,8 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
 export default function App() {
-  // set role demo user
-const test ={
-  username:"huynh",
-  role:"user"
-}
-sessionStorage.setItem("loginAuth",JSON.stringify(test))
+
+
   const [controller, dispatch] = useMaterialUIController();
   const {
     loginAuth,
@@ -77,7 +73,6 @@ sessionStorage.setItem("loginAuth",JSON.stringify(test))
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
   }, [pathname]);
-
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
       if (route.collapse) {
@@ -90,7 +85,6 @@ sessionStorage.setItem("loginAuth",JSON.stringify(test))
 
       return null;
     });
-
   const configsButton = (
     <MDBox
       display="flex"

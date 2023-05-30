@@ -45,11 +45,12 @@ import {
   setMiniSidenav,
   setTransparentSidenav,
   setWhiteSidenav,
+  setLoginAuth,
 } from "context";
 
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const [controller, dispatch] = useMaterialUIController();
-  const { miniSidenav, transparentSidenav, whiteSidenav, darkMode, sidenavColor } = controller;
+  const { miniSidenav, transparentSidenav, whiteSidenav, darkMode, sidenavColor,loginAuth } = controller;
   const location = useLocation();
   const collapseName = location.pathname.replace("/", "");
 
@@ -82,7 +83,29 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", handleMiniSidenav);
   }, [dispatch, location]);
-
+  const logout =() =>{
+    const e = {role:"noRole"}
+    setLoginAuth(dispatch,e)
+    localStorage.setItem("loginAuth",JSON.stringify(e))
+  window.location="/";
+  }
+  const checkuser =(object)=>{
+    if(object.role!=="noRole"){
+    return (<MDBox p={2} mt="auto">
+    
+    <MDButton
+      component="a"
+      target="_blank"
+      rel="noreferrer"
+      variant="gradient"
+      color={sidenavColor}
+      fullWidth
+      onClick={logout}
+    >
+      ログアウト
+    </MDButton>
+  </MDBox>)}
+  }
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
   const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, href, route }) => {
     let returnValue;
@@ -179,19 +202,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
         }
       />
       <List>{renderRoutes}</List>
-      <MDBox p={2} mt="auto">
-        <MDButton
-          component="a"
-          href="/logout"
-          target="_blank"
-          rel="noreferrer"
-          variant="gradient"
-          color={sidenavColor}
-          fullWidth
-        >
-          ログアウト
-        </MDButton>
-      </MDBox>
+      {checkuser(loginAuth)}
     </SidenavRoot>
   );
 }

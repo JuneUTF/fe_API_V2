@@ -59,23 +59,23 @@ function Configurator() {
   const sidenavColors = ["primary", "dark", "info", "success", "warning", "error"];
   const handleCloseConfigurator = () => setOpenConfigurator(dispatch, false);
   const handleTransparentSidenav = () => {
-    sessionStorage.setItem("Sidenav","transparent");
+    localStorage.setItem("Sidenav","transparent");
     setTransparentSidenav(dispatch, true);
     setWhiteSidenav(dispatch, false);
   };
   const handleWhiteSidenav = () => {
-    sessionStorage.setItem("Sidenav","white");
+    localStorage.setItem("Sidenav","white");
     setWhiteSidenav(dispatch, true);
     setTransparentSidenav(dispatch, false);
   };
   const handleDarkSidenav = () => {
-    sessionStorage.setItem("Sidenav","dark");
+    localStorage.setItem("Sidenav","dark");
     setWhiteSidenav(dispatch, false);
     setTransparentSidenav(dispatch, false);
   };
   
   const handleDarkMode = () => {
-    sessionStorage.setItem("darkMode",!darkMode);
+    localStorage.setItem("darkMode",!darkMode);
     setDarkMode(dispatch, !darkMode);
 
   }
@@ -185,7 +185,7 @@ function Configurator() {
                     borderColor: darkMode ? white.main : dark.main,
                   },
                 })}
-                onClick={() => {setSidenavColor(dispatch, color), sessionStorage.setItem("sidenavColor",color)}}
+                onClick={() => {setSidenavColor(dispatch, color), localStorage.setItem("sidenavColor",color)}}
               />
             ))}
           </MDBox>

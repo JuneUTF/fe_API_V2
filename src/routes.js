@@ -23,19 +23,14 @@ import HomeLeaderAdmin from "layouts/LeaderAdminRole/Home";
 import RegisterAdmin from "layouts/LeaderAdminRole/RegisterAdmin";
 import Logout from "layouts/authentication/Logout";
 
-const auth = sessionStorage.getItem("loginAuth");
+
+const auth = localStorage.getItem("loginAuth");
 const role = auth ? JSON.parse(auth).role : "noRole";
-console.log( role);
 const noRole =[
   {
     key: "home",
     route: "/",
     component: <Login />,
-  },
-  {
-    key: "logout",
-    route: "/logout",
-    component: <Logout />,
   },
   {
     type: "collapse",
