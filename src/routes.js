@@ -1,7 +1,3 @@
-
-
-// @mui icons
-import Icon from "@mui/material/Icon";
 import NoPage from "layouts/NoPage";
 import Certification from "layouts/authentication/ForgetPassword/Certification";
 import ChangePassword from "layouts/authentication/ForgetPassword/ChangePassword";
@@ -21,11 +17,12 @@ import Day15 from "layouts/AdminRole/Day15"
 import Day7 from "layouts/AdminRole/Day7"
 import HomeLeaderAdmin from "layouts/LeaderAdminRole/Home";
 import RegisterAdmin from "layouts/LeaderAdminRole/RegisterAdmin";
-import Logout from "layouts/authentication/Logout";
-
 
 const auth = localStorage.getItem("loginAuth");
 const role = auth ? JSON.parse(auth).role : "noRole";
+import LoginIcon from '@mui/icons-material/Login';
+import KeyIcon from '@mui/icons-material/Key';
+import SyncLockIcon from '@mui/icons-material/SyncLock';
 const noRole =[
   {
     key: "home",
@@ -36,7 +33,7 @@ const noRole =[
     type: "collapse",
     name: "ログイン",
     key: "Login",
-    icon: <Icon fontSize="small">Login</Icon>,
+    icon: <LoginIcon/>,
     route: "/Login",
     component: <Login />,
   },
@@ -44,7 +41,7 @@ const noRole =[
     type: "collapse",
     name: "パスワード忘れ",
     key: "Certification",
-    icon: <Icon fontSize="small">Certification</Icon>,
+    icon: <KeyIcon/>,
     route: "/ForgetPassword/Certification",
     component: <Certification />,
   },
@@ -52,7 +49,7 @@ const noRole =[
     type: "collapse",
     name: "パスワード再設定",
     key: "ChangePassword",
-    icon: <Icon fontSize="small">ChangePassword</Icon>,
+    icon: <SyncLockIcon/>,
     route: "ForgetPassword/ChangePassword",
     component: <ChangePassword />,
   },
@@ -62,13 +59,14 @@ const noRole =[
     component: <NoPage />,
   }
 ]
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import EditIcon from '@mui/icons-material/Edit';
 const userRole=[
   {
     type: "collapse",
     name: "情報",
     key: "Home",
-    icon: <Icon fontSize="small">Home</Icon>,
+    icon: <AccountCircleIcon/>,
     route: "/Home",
     component: <HomeUser />,
   },
@@ -76,7 +74,7 @@ const userRole=[
     type: "collapse",
     name: "情報編集",
     key: "update",
-    icon: <Icon fontSize="small">update</Icon>,
+    icon: <EditIcon/>,
     route: "/update",
     component: <Update />,
   },
@@ -84,7 +82,7 @@ const userRole=[
     type: "collapse",
     name: "パスワード変更",
     key: "ChangePassword",
-    icon: <Icon fontSize="small">ChangePassword</Icon>,
+    icon: <SyncLockIcon/>,
     route: "/ChangePassword",
     component: <ChangePass />,
   },
@@ -98,18 +96,17 @@ const userRole=[
     route: "*",
     component: <NoPage />,
   },
-  {
-    key: "logout",
-    route: "/logout",
-    component: <Logout />,
-  },
 ]
+
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 const adminRole =[
   {
     type: "collapse",
     name: "ユーザー一覧表",
     key: "listuser",
-    icon: <Icon fontSize="small">listuser</Icon>,
+    icon: <FormatListNumberedIcon/>,
     route: "/listuser",
     component: <ListUser />,
   },
@@ -117,7 +114,7 @@ const adminRole =[
     type: "collapse",
     name: "残り30日",
     key: "day30",
-    icon: <Icon fontSize="small">day30</Icon>,
+    icon: <ArrowRightIcon/>,
     route: "/day30",
     component: <Day30 />,
   },
@@ -125,7 +122,7 @@ const adminRole =[
     type: "collapse",
     name: "残り15日",
     key: "day15",
-    icon: <Icon fontSize="small">day15</Icon>,
+    icon: <ArrowRightIcon/>,
     route: "/day15",
     component: <Day15 />,
   },
@@ -133,7 +130,7 @@ const adminRole =[
     type: "collapse",
     name: "残り7日",
     key: "day7",
-    icon: <Icon fontSize="small">day7</Icon>,
+    icon: <ArrowRightIcon/>,
     route: "/day7",
     component: <Day7 />,
   },
@@ -141,31 +138,15 @@ const adminRole =[
     type: "collapse",
     name: "ユーザー追加",
     key: "register",
-    icon: <Icon fontSize="small">register</Icon>,
+    icon: <PersonAddIcon/>,
     route: "/register",
     component: <RegisterUser />,
   },
   {
     type: "collapse",
-    name: "ユーザー編集",
-    key: "update",
-    icon: <Icon fontSize="small">update</Icon>,
-    route: "/update",
-    component: <HomeUpdateUser />,
-  },
-  {
-    type: "collapse",
-    name: "ユーザー情報",
-    key: "userinfo",
-    icon: <Icon fontSize="small">userinfo</Icon>,
-    route: "/userinfo",
-    component: <HomeInfoUser />,
-  },
-  {
-    type: "collapse",
     name: "パスワード変更",
     key: "ChangePassword",
-    icon: <Icon fontSize="small">ChangePassword</Icon>,
+    icon: <SyncLockIcon/>,
     route: "/ChangePassword",
     component: <ChangePass />,
   },
@@ -173,6 +154,16 @@ const adminRole =[
     key: "updateid",
     route: "/update/:id",
     component: <UpdateUser />,
+  },
+  {
+    key: "HomeInfoUser",
+    route: "/userinfo",
+    component: <HomeInfoUser />,
+  },
+  {
+    key: "HomeUpdateUser",
+    route: "/update",
+    component: <HomeUpdateUser />,
   },
   {
     key: "info",
@@ -189,18 +180,15 @@ const adminRole =[
     route: "*",
     component: <NoPage />,
   },
-  {
-    key: "logout",
-    route: "/logout",
-    component: <Logout />,
-  },
 ]
+import GroupIcon from '@mui/icons-material/Group';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 const leadAdminRole = [
   {
     type: "collapse",
     name: "管理者一覧表",
     key: "HomeLeader",
-    icon: <Icon fontSize="small">HomeLeader</Icon>,
+    icon: <GroupIcon/>,
     route: "/HomeLeader",
     component: <HomeLeaderAdmin />,
   },
@@ -208,7 +196,7 @@ const leadAdminRole = [
     type: "collapse",
     name: "管理者追加",
     key: "registerAdmin",
-    icon: <Icon fontSize="small">register</Icon>,
+    icon: <GroupAddIcon/>,
     route: "/registerAdmin",
     component: <RegisterAdmin />,
   },
