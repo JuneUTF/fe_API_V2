@@ -84,7 +84,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
     return () => window.removeEventListener("resize", handleMiniSidenav);
   }, [dispatch, location]);
   const logout =() =>{
-    const e = {role:"noRole"}
+    const e = {role_name:"noRole"}
     setLoginAuth(dispatch,e)
     localStorage.setItem("loginAuth",JSON.stringify(e))
   window.location="/";

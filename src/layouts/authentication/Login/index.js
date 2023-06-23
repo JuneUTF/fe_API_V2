@@ -2,26 +2,32 @@
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import MDTypography from "components/MDTypography";
-import { useMaterialUIController,setLoginAuth} from "context";
+import { useMaterialUIController, setLoginAuth } from "context";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import { Card, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
-import { useForm } from "react-hook-form";
+import { Card, Col, Container, Form, Row } from "react-bootstrap";
+import { useForm  } from "react-hook-form";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import MDButton from "components/MDButton";
+import axios from "axios";
 
 function Login(props) {
-
   const [controller, dispatch] = useMaterialUIController();
   const { sidenavColor, } = controller;
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' })
   const [messenger, setMessenger] = useState("");
-  const onSubmit = e => {
-    setMessenger("");
-    setLoginAuth(dispatch,e)
-    localStorage.setItem("loginAuth",JSON.stringify(e))
-    window.location="/";
+  const onSubmit = item => {
+    axios.post('http://localhost:8080/login', item)
+      .then(response => {
+        console.log(response.data);
+        localStorage.setItem("loginAuth",JSON.stringify(response.data))
+        setMessenger("");
+        setLoginAuth(dispatch, response.data)
+        window.location="/";
+      })
+      .catch(error => {
+        setMessenger(error.response.data.information);
+      });
   }
 
   return (
@@ -37,7 +43,7 @@ function Login(props) {
                     <h2 className="fw-bold mb-2 text-uppercase text-center">ログイン</h2>
                     <div className="mb-3">
                       <Form onSubmit={handleSubmit(onSubmit)}>
-                        <Form.Group controlId="role">
+                        <Form.Group controlId="Login">
                           <Form.Label className="text-center">
                             メールアドレス
                           </Form.Label>
@@ -58,13 +64,13 @@ function Login(props) {
                         <div className='text-danger fw-light mb-3 mt-1'>{errors.email && errors.email.message}</div>
                         <Form.Group
                           className="mb-3"
-                          controlId="role"
+                          controlId="password"
                         >
                           <Form.Label>パスワード</Form.Label>
                           <Form.Control
-                            type="role"
-                            placeholder="ユーザー名を入力してください。"
-                            {...register("role", {
+                            type="password"
+                            placeholder="パスワードを入力してください。"
+                            {...register("password", {
                               required: "パスワードを入力してください。",
                               pattern: {
                                 value: /^[a-zA-Z0-9]+$/,
@@ -72,15 +78,15 @@ function Login(props) {
                               },
                               validate: {
                                 length: (value) => {
-                                  if (value.length < 4 || value.length > 25) {
-                                    return "ユーザー名は6文字以上25文字以下である必要があります。";
+                                  if (value.length < 6 || value.length > 25) {
+                                    return "パスワードは6文字以上25文字以下である必要があります。";
                                   }
                                 },
                               },
                             })}
                           />
                         </Form.Group>
-                        <div className='text-danger fw-light mb-3 mt-1'>{errors.role && errors.role.message}</div>
+                        <div className='text-danger fw-light mb-3 mt-1'>{errors.password && errors.password.message}</div>
                         {messenger && <div className='alert alert-danger'> {messenger}</div>}
                         <div className="d-grid">
                           <MDButton color={sidenavColor} type="submit" disabled={Object.keys(errors).length > 0}>

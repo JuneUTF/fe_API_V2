@@ -19,7 +19,7 @@ import HomeLeaderAdmin from "layouts/LeaderAdminRole/Home";
 import RegisterAdmin from "layouts/LeaderAdminRole/RegisterAdmin";
 
 const auth = localStorage.getItem("loginAuth");
-const role = auth ? JSON.parse(auth).role : "noRole";
+const role = auth ? JSON.parse(auth).role_name : "noRole";
 import LoginIcon from '@mui/icons-material/Login';
 import KeyIcon from '@mui/icons-material/Key';
 import SyncLockIcon from '@mui/icons-material/SyncLock';
