@@ -90,7 +90,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
   window.location="/";
   }
   const checkuser =(object)=>{
-    if(object.role!=="noRole"){
+    if(object.role_name!=="noRole"){
     return (<MDBox p={2} mt="auto">
     
     <MDButton
