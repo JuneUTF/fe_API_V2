@@ -79,7 +79,7 @@ function Footer({ company, links }) {
 
 // Setting default values for the props of Footer
 Footer.defaultProps = {
-  company: { href: "http://www.kksoft.co.jp/", name: "K&K SOFT All rights reserred." },
+  company: { href: "http://www.kksoft.co.jp/", name: "K&Kソフト株式会社" },
   links: [
     // { href: "https://www.creative-tim.com/", name: "Creative Tim" },
     // { href: "https://www.creative-tim.com/presentation", name: "About Us" },

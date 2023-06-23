@@ -15,9 +15,6 @@ function Login(props) {
 
   const [controller, dispatch] = useMaterialUIController();
   const { sidenavColor, } = controller;
-  const location = useLocation();
-  const txtmsg = location.state;
-  const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' })
   const [messenger, setMessenger] = useState("");
   const onSubmit = e => {
@@ -44,8 +41,6 @@ function Login(props) {
                           <Form.Label className="text-center">
                             メールアドレス
                           </Form.Label>
-                          <div className='text-success fw-light mb-3 mt-1'>{txtmsg && txtmsg}</div>
-
                           <Form.Control
                             type="text"
                             placeholder="メールアドレスを入力してください。"
@@ -65,12 +60,12 @@ function Login(props) {
                           className="mb-3"
                           controlId="role"
                         >
-                          <Form.Label>Role</Form.Label>
+                          <Form.Label>パスワード</Form.Label>
                           <Form.Control
-                            type="text"
+                            type="role"
                             placeholder="ユーザー名を入力してください。"
                             {...register("role", {
-                              required: "ユーザー名を入力してください。",
+                              required: "パスワードを入力してください。",
                               pattern: {
                                 value: /^[a-zA-Z0-9]+$/,
                                 message: "アルファベットと番号のみです。",
